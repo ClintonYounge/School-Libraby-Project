@@ -8,6 +8,8 @@
   - [Key Features](#key-features)
 - [💻 Getting Started](#getting-started)
   - [Setup](#setup)
+  - [Prerequisites](#prerequisites)
+  - [Install](#install)
 - [👥 Authors](#authors)
 - [🔭 Future Features](#future-features)
 - [🤝 Contributing](#contributing)
@@ -16,9 +18,9 @@
 - [📝 License](#license)
 
 
-# 📖 [Enumerable Project] <a name="about-project"></a>
+# 📖 [School Library] <a name="about-project"></a>
 
-**[Enumerable Project]** In this project I will be utilizing Ruby to create a library.
+**[School Library]** In this project I will be utilizing Ruby to create a library.
 
 ## 🛠 Built With <a name="built-with"></a>
 
@@ -35,25 +37,43 @@ The site was built with Ruby.
 
 ### Key Features <a name="key-features"></a>
 
-- N/A
+- Person Class.
+- Student Class.
+- Teacher Class.
 
-## 💻 Getting Started <a name="getting-started"></a>
+## Getting Started
+
+To get a local copy up and running follow these simple example steps.
+
+### Prerequisites
+
+> You need the following tools be installed in your computer:
+
+> - [Git](https://www.linode.com/docs/guides/how-to-install-git-on-linux-mac-and-windows/)
+> - [Ruby](https://github.com/microverseinc/curriculum-ruby/blob/main/simple-ruby/articles/ruby_installation_instructions.md)
+> - IDE
+> - Etc
 
 ### Setup
 
 Clone this repository to your desired folder:
 
-`git clone git remote add origin https://github.com/ClintonYounge/School-Library-Project`
+```sh
+  cd my-prefered-folder
+  
+  git clone https://github.com/clintonyounge/School-Library-Project.git
 
-or
+```
 
-`git clone git remote add origin https://github.com/ClintonYounge/School-Library-Project` <-- _Only if you have [SSH keys configured](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account) on your GitHub account_.
+### Install
 
-or
+Install this project with:
 
-Utilizing Github Desktop. A simple interface, thats powerful enough to simplify this process.
-https://desktop.github.com/
-
+```sh
+  cd School-Library-Project
+  
+  bundle install
+```
 
 ## 👥 Authors <a name="authors"></a>
 
@@ -67,7 +87,7 @@ https://desktop.github.com/
 
 ## 🔭 Future Features <a name="future-features"></a>
 
-- Data
+- More robust functionality
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
