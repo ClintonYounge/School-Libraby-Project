@@ -1,6 +1,6 @@
 class Person
   attr_reader :id
-  attr_accessor :name, :age
+  attr_accessor :name, :age, :parent_permission
 
   def initialize(name = 'Unknown', age = nil, parent_permission: true)
     @id = rand(1...1000)
