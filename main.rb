@@ -12,7 +12,7 @@ puts '-----------------'
 
 puts 'Student class'
 puts '-----------------'
-billy = Student.new('Billy', 15, classroom: 'B')
+billy = Student.new('B', 'Billy', 15)
 puts billy.name
 puts billy.age
 puts billy.classroom
@@ -21,9 +21,8 @@ puts '-----------------'
 
 puts 'Teacher class'
 puts '-----------------'
-sir_mark = Teacher.new('Mark', age: 45, specialization: 'Math')
+sir_mark = Teacher.new('Math', 'Junior', 45)
 puts sir_mark.name
 puts sir_mark.age
 puts sir_mark.specialization
 puts sir_mark.can_use_services?
-puts sir_mark.id
