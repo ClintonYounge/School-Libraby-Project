@@ -35,7 +35,9 @@ The site was built with Ruby.
 
 ### Key Features <a name="key-features"></a>
 
-- N/A
+- Person Class.
+- Student Class.
+- Teacher Class.
 
 ## 💻 Getting Started <a name="getting-started"></a>
 
