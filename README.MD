@@ -69,7 +69,7 @@ https://desktop.github.com/
 
 ## 🔭 Future Features <a name="future-features"></a>
 
-- Data
+- More robust functionality
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
