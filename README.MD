@@ -40,6 +40,8 @@ The site was built with Ruby.
 - Person Class.
 - Student Class.
 - Teacher Class.
+- Decorator to Capitalize.
+- Decorator to Trim to characters
 
 ## Getting Started
 
