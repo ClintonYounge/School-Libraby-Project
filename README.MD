@@ -42,6 +42,8 @@ The site was built with Ruby.
 - Teacher Class.
 - Decorator to Capitalize.
 - Decorator to Trim to characters
+- Classroom Class.
+- Books class with rentals feature
 
 ## Getting Started
 
