@@ -11,9 +11,9 @@ book1 = Book.new('The Great Unknown', 'CJ. AY')
 book2 = Book.new('Unknown The Great', 'AY. CJ')
 
 # Create rentals for the books and people
-rental1 = Rental.new('2023-08-03', book1, person1)
-rental2 = Rental.new('2023-08-05', book1, person2)
-rental3 = Rental.new('2023-08-08', book2, person1)
+Rental.new('2023-08-03', book1, person1)
+Rental.new('2023-08-05', book1, person2)
+Rental.new('2023-08-08', book2, person1)
 
 # Print the rentals associated with a book
 puts "#{book1.title} Rentals:"
