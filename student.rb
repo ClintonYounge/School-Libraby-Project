@@ -5,10 +5,15 @@ class Student < Person
 
   def initialize(classroom, name = 'Unknown', age = nil, parent_permission: true)
     super(name, age, parent_permission: parent_permission)
-    @classroom = classroom
-  end
+    classroom.add_student(self) if classroom
 
   def play_hooky
     '¯\\(ツ)/¯'
+  end
+
+  def classroom=(classroom)
+    @classroom.students.delete(self) if @classroom
+    @classroom = classroom
+    classroom.add_student(self) if classroom
   end
 end
