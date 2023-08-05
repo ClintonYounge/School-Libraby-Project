@@ -1,24 +1,6 @@
-require_relative 'library'
-require_relative 'book'
+require_relative 'app'
 
-class App
-  attr_accessor :library
-
-  def initialize
-    @library = Library.new
-  end
-
-  def welcome
-    display_welcome_message
-  end
-
-  def run
-    display_options
-    handle_user_choice
-  end
-
-  private
-
+class Main
   def display_welcome_message
     puts 'Welcome to the School\'s Library'
     puts '--------------------------------'
@@ -57,63 +39,7 @@ class App
     end
   end
 
-  def list_all_books
-    puts 'Listing all books'
-    puts '--------------------------------'
-
-    books = @library.grab_all_books
-
-    if books.empty?
-      puts 'There are no books in the library'
-    else
-      books.each do |book|
-        puts "Title: #{book.title}, Author: #{book.author}"
-        puts '--------------------------------'
-      end
-    end
-    run
-  end
-
-  def list_all_people
-    puts 'Listing all people'
-  end
-
-  def create_person
-    puts 'Creating a person'
-  end
-
-  def create_book
-    puts 'Creating a book'
-
-    puts 'Please enter the book title:'
-    title = gets.chomp
-
-    puts 'Please enter the book author:'
-    author = gets.chomp
-
-    new_book = Book.new(title, author)
-    @library.add_book(new_book)
-
-    puts 'Book created successfully!'
-    run
-  end
-
-  def create_rental
-    puts 'Creating a rental'
-  end
-
-  def list_rentals_for_person
-    puts 'Listing all rentals for a given person id'
-  end
-
-  def exit
-    puts 'Exiting'
-  end
-end
-
-def main
   app = App.new
-  app.welcome
   app.run
 end
 
