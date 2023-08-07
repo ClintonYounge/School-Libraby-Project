@@ -80,6 +80,7 @@ class App
       @people.push(@students.student)
     elsif person_type == 2
       @teachers.teacher_input
+      @people.push(@teachers.teacher)
     else
       puts 'Invalid option'
     end
