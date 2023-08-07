@@ -70,20 +70,6 @@ class App
     run
   end
 
-  def person_type_two
-    puts 'Creating a teacher'
-    puts 'Please enter the teacher\'s name:'
-    name = gets.chomp
-    puts 'Please enter the teacher\'s age:'
-    age = gets.chomp.to_i
-    puts 'Please enter the teacher\'s specialization:'
-    specialization = gets.chomp
-    teacher = Teacher.new(specialization, name, age)
-    @teachers.add_teacher(teacher)
-    @people.push(teacher)
-    puts 'Teacher created successfully!'
-  end
-
   def create_person
     puts 'Do you want to create a student (1) or a teacher (2)? [Input the number]'
 
@@ -93,7 +79,7 @@ class App
       @students.student_input
       @people.push(@students.student)
     elsif person_type == 2
-      person_type_two
+      @teachers.teacher_input
     else
       puts 'Invalid option'
     end

@@ -14,9 +14,7 @@ class Students
     @students
   end
 
-  def student
-    @student
-  end
+  attr_reader :student
 
   def student_input
     puts 'Please enter the student\'s name:'
