@@ -34,7 +34,7 @@ class App
   end
 
   def list_all_people
-    @people_handler.list_all_people(@students, @teachers)   
+    @people_handler.list_all_people(@students, @teachers)
     run
   end
 

@@ -1,6 +1,4 @@
 class BookHandler
-  attr_accessor :library_book, :new_book
-
   def initialize
     @new_book
   end
@@ -8,7 +6,7 @@ class BookHandler
   def library_book
     @new_book
   end
-  
+
   def create_book
     puts 'Creating a book'
 
