@@ -64,29 +64,10 @@ class App
     else
       puts ' '
       teachers.each do |teacher|
-        puts "Name: #{teacher.name}, Age: #{teacher.age}, Specialization: #{teacher.specialization}"
+        puts "[Teacher] Name: #{teacher.name}, Age: #{teacher.age}, Specialization: #{teacher.specialization}"
       end
     end
     run
-  end
-
-  def person_type_one
-    puts 'Please enter the student\'s name:'
-    name = gets.chomp
-
-    puts 'Please enter the student\'s age:'
-    age = gets.chomp.to_i
-
-    puts 'Does the student have parent permission? (Y/N):'
-
-    parent_permission = gets.chomp.upcase == 'Y'
-
-    classroom = 'Unknown'
-
-    student = Student.new(classroom, name, age, parent_permission: parent_permission)
-    @students.add_student(student)
-    @people.push(student)
-    puts 'Student created successfully!'
   end
 
   def person_type_two
@@ -109,7 +90,8 @@ class App
     person_type = gets.chomp.to_i
 
     if person_type == 1
-      person_type_one
+      @students.student_input
+      @people.push(@students.student)
     elsif person_type == 2
       person_type_two
     else
