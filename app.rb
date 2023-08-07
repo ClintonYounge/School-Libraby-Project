@@ -1,19 +1,21 @@
 require_relative 'library'
-require_relative 'book'
 require_relative 'student'
 require_relative 'teacher'
 require_relative 'students'
 require_relative 'teachers'
+require_relative 'book'
 require_relative 'rental'
 require_relative 'menu_handler'
+require_relative 'book_handler'
 
 class App
-  attr_accessor :library, :students, :teachers
+  attr_accessor :library, :students, :teachers, :something, :bookhandler
 
   def initialize
     @library = Library.new
     @students = Students.new
     @teachers = Teachers.new
+    @bookhandler = BookHandler.new
     @people = []
     @rentals = []
   end
@@ -27,23 +29,6 @@ class App
     menu_handler = MenuHandler.new(self)
     menu_handler.display_options
     menu_handler.handle_user_choice
-  end
-
-  def list_all_books
-    puts 'Listing all books'
-    puts '--------------------------------'
-
-    books = @library.grab_all_books
-
-    if books.empty?
-      puts 'There are no books in the library'
-    else
-      books.each do |book|
-        puts "Title: '#{book.title}', Author: #{book.author}"
-        puts '--------------------------------'
-      end
-    end
-    run
   end
 
   def list_all_people
@@ -88,18 +73,14 @@ class App
   end
 
   def create_book
-    puts 'Creating a book'
-
-    puts 'Please enter the book title:'
-    title = gets.chomp
-
-    puts 'Please enter the book author:'
-    author = gets.chomp
-
-    new_book = Book.new(title, author)
+    @bookhandler.create_book
+    new_book = @bookhandler.library_book
     @library.add_book(new_book)
+    run
+  end
 
-    puts 'Book created successfully!'
+  def list_all_books
+    @bookhandler.list_all_books(@library)
     run
   end
 
