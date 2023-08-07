@@ -89,6 +89,17 @@ Install this project with:
 - Linkedin: [@clinton-younge](https://www.linkedin.com/in/clinton-younge-83386a25a/)
 - Twitter: [@YoungeCjay](https://twitter.com/YoungeCjay)
 
+👤 **Sylvester Wamaya**
+
+- GitHub: [@githubhandle](https://github.com/sylvester-wamaya)
+- LinkedIn: [LinkedIn](https://www.linkedin.com/in/sylvester-wamaya-b11a93112/)
+
+👤 **Moyasi**
+
+- GitHub: [@MoyasiGinko](https://github.com/MoyasiGinko)
+- Twitter: [@MoyasiGinko](https://twitter.com/moyasi_ginko)
+- LinkedIn: [@MoyasiGinko](https://www.linkedin.com/in/mahmudur-rahman-a8a151257)
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## 🔭 Future Features <a name="future-features"></a>
