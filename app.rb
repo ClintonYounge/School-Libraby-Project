@@ -7,6 +7,7 @@ require_relative 'book'
 require_relative 'rental'
 require_relative 'menu_handler'
 require_relative 'book_handler'
+require_relative 'people_handler'
 
 class App
   attr_accessor :library, :students, :teachers, :something, :bookhandler
@@ -16,6 +17,7 @@ class App
     @students = Students.new
     @teachers = Teachers.new
     @bookhandler = BookHandler.new
+    @people_handler = PeopleHandler.new
     @people = []
     @rentals = []
   end
@@ -32,26 +34,7 @@ class App
   end
 
   def list_all_people
-    students = @students.grab_students
-    teachers = @teachers.grab_teachers
-
-    if students.empty?
-      puts 'There is no student in the library'
-    else
-      puts ' '
-      students.each do |student|
-        puts "[Student] Name: #{student.name}, Age: #{student.age}, Parental Perms: #{student.parent_permission}"
-      end
-    end
-
-    if teachers.empty?
-      puts 'There is no teacher in the library'
-    else
-      puts ' '
-      teachers.each do |teacher|
-        puts "[Teacher] Name: #{teacher.name}, Age: #{teacher.age}, Specialization: #{teacher.specialization}"
-      end
-    end
+    @people_handler.list_all_people(@students, @teachers)   
     run
   end
 
