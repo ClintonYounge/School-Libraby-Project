@@ -46,6 +46,7 @@ The site was built with Ruby.
 - Books class with rentals feature.
 - Create rental feature.
 - Get rentals by ID feature.
+- Implement Solid principles.
 
 ## Getting Started
 
@@ -89,11 +90,22 @@ Install this project with:
 - Linkedin: [@clinton-younge](https://www.linkedin.com/in/clinton-younge-83386a25a/)
 - Twitter: [@YoungeCjay](https://twitter.com/YoungeCjay)
 
+👤 **Sylvester Wamaya**
+
+- GitHub: [@githubhandle](https://github.com/sylvester-wamaya)
+- LinkedIn: [LinkedIn](https://www.linkedin.com/in/sylvester-wamaya-b11a93112/)
+
+👤 **Moyasi**
+
+- GitHub: [@MoyasiGinko](https://github.com/MoyasiGinko)
+- Twitter: [@MoyasiGinko](https://twitter.com/moyasi_ginko)
+- LinkedIn: [@MoyasiGinko](https://www.linkedin.com/in/mahmudur-rahman-a8a151257)
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## 🔭 Future Features <a name="future-features"></a>
 
-- More robust functionality
+- Storage
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -113,7 +125,7 @@ If you like this project feel free to leave a star to show your support.
 
 ## 🙏 Acknowledgments <a name="acknowledgements"></a>
 
-I would like to give thanks to Microverse for providing an environment that makes me strive to grow as a developer.
+We would like to give thanks to Microverse for providing an environment that makes us strive to grow as a developer.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
