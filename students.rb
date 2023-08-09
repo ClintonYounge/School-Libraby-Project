@@ -47,18 +47,17 @@ class Students
       }
     end
 
-    File.open('students.json', 'w') do |file|
-      file.write(JSON.generate(students_data))
-    end
+    File.write('students.json', JSON.generate(students_data))
   end
 
   def load_students
-    if File.exist?('students.json')
-      students_data = JSON.parse(File.read('students.json'))
-      students_data.each do |student_data|
-        student = Student.new(student_data['classroom'], student_data['name'], student_data['age'].to_i, parent_permission: student_data['parent_permission'])
-        add_student(student)
-      end
+    return unless File.exist?('students.json')
+
+    students_data = JSON.parse(File.read('students.json'))
+    students_data.each do |student_data|
+      student = Student.new(student_data['classroom'], student_data['name'], student_data['age'].to_i,
+                            parent_permission: student_data['parent_permission'])
+      add_student(student)
     end
   end
 end

@@ -57,7 +57,6 @@ class App
 
   def create_book
     @bookhandler.create_book(@library)
-    new_book = @bookhandler.library_book
     run
   end
 
@@ -116,7 +115,7 @@ class App
     end
     run
   end
-  
+
   def exit
     puts 'Thank you for using this app!'
   end

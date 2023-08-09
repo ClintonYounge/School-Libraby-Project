@@ -41,18 +41,16 @@ class Teachers
       }
     end
 
-    File.open('teachers.json', 'w') do |file|
-      file.write(JSON.generate(teachers_data))
-    end
+    File.write('teachers.json', JSON.generate(teachers_data))
   end
 
   def load_teachers
-    if File.exist?('teachers.json')
-      teachers_data = JSON.parse(File.read('teachers.json'))
-      teachers_data.each do |teacher_data|
-        teacher = Teacher.new(teacher_data['specialization'], teacher_data['name'], teacher_data['age'].to_i)
-        add_teacher(teacher)
-      end
+    return unless File.exist?('teachers.json')
+
+    teachers_data = JSON.parse(File.read('teachers.json'))
+    teachers_data.each do |teacher_data|
+      teacher = Teacher.new(teacher_data['specialization'], teacher_data['name'], teacher_data['age'].to_i)
+      add_teacher(teacher)
     end
   end
 end

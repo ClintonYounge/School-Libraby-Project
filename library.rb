@@ -12,11 +12,11 @@ class Library
   end
 
   def load_books
-    if File.exist?('books.json')
-      books_data = JSON.parse(File.read('books.json'))
-      books_data.each do |book_data|
-        add_book(Book.new(book_data['title'], book_data['author']))
-      end
+    return unless File.exist?('books.json')
+
+    books_data = JSON.parse(File.read('books.json'))
+    books_data.each do |book_data|
+      add_book(Book.new(book_data['title'], book_data['author']))
     end
   end
 
@@ -28,8 +28,6 @@ class Library
       }
     end
 
-    File.open('books.json', 'w') do |file|
-      file.write(JSON.generate(books_data))
-    end
+    File.write('books.json', JSON.generate(books_data))
   end
 end
