@@ -97,11 +97,17 @@ class App
     book_num = grab_book_num
     person_num = grab_person_num
 
-    puts 'Please enter the date in YYYY-MM-DD format:'
-    date = gets.chomp
+    if person_num >= 0 && person_num < @people.length
+      puts 'Please enter the date in YYYY-MM-DD format:'
+      date = gets.chomp
 
-    @rentals.push(Rental.new(date, @library.grab_all_books[book_num], @people[person_num]))
-    puts 'Rental created successfully!'
+      rental = Rental.new(date, @library.grab_all_books[book_num], @people[person_num])
+      @rentals.push(rental)
+      puts 'Rental created successfully!'
+    else
+      puts 'Invalid person selection.'
+    end
+
     run
   end
 
@@ -114,6 +120,28 @@ class App
       puts "Date: #{rental.date}, Book: #{rental.book.title}" if rental.person.id == person_id
     end
     run
+  end
+
+  def load_rentals
+    return unless File.exist?('rentals.json')
+
+    rentals_data = JSON.parse(File.read('rentals.json'))
+    rentals_data.each do |rental_data|
+      rental = Rental.new(rental_data['date'], rental_data['book'], rental_data['person'])
+      add_rental(rental)
+    end
+  end
+
+  def save_rentals
+    rentals_data = @rentals.map do |rental|
+      {
+        'date' => rental.date,
+        'book' => rental.book,
+        'person' => rental.person
+      }
+    end
+
+    File.write('rentals.json', JSON.generate(rentals_data))
   end
 
   def exit
