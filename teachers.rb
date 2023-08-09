@@ -1,3 +1,5 @@
+require 'json'
+
 class Teachers
   attr_accessor :teachers
   attr_reader :teacher
@@ -28,5 +30,29 @@ class Teachers
     add_teacher(teacher)
     @people = teacher
     puts 'Teacher created successfully!'
+  end
+
+  def save_teachers
+    teachers_data = @teachers.map do |teacher|
+      {
+        'specialization' => teacher.specialization,
+        'name' => teacher.name,
+        'age' => teacher.age
+      }
+    end
+
+    File.open('teachers.json', 'w') do |file|
+      file.write(JSON.generate(teachers_data))
+    end
+  end
+
+  def load_teachers
+    if File.exist?('teachers.json')
+      teachers_data = JSON.parse(File.read('teachers.json'))
+      teachers_data.each do |teacher_data|
+        teacher = Teacher.new(teacher_data['specialization'], teacher_data['name'], teacher_data['age'].to_i)
+        add_teacher(teacher)
+      end
+    end
   end
 end

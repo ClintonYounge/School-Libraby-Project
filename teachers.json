@@ -1,0 +1,12 @@
+[
+    {
+        "specialization":"Math",
+        "name":"John",
+        "age":30
+    },
+    {
+        "specialization":"Mech tech",
+        "name":"Xavier",
+        "age":34
+    }
+]

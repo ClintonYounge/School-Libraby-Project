@@ -1,3 +1,5 @@
+require 'json'
+
 class Students
   attr_accessor :students
 
@@ -33,5 +35,30 @@ class Students
     add_student(student)
     @student = student
     puts 'Student created successfully!'
+  end
+
+  def save_students
+    students_data = @students.map do |student|
+      {
+        'classroom' => student.classroom,
+        'name' => student.name,
+        'age' => student.age,
+        'parent_permission' => student.parent_permission
+      }
+    end
+
+    File.open('students.json', 'w') do |file|
+      file.write(JSON.generate(students_data))
+    end
+  end
+
+  def load_students
+    if File.exist?('students.json')
+      students_data = JSON.parse(File.read('students.json'))
+      students_data.each do |student_data|
+        student = Student.new(student_data['classroom'], student_data['name'], student_data['age'].to_i, parent_permission: student_data['parent_permission'])
+        add_student(student)
+      end
+    end
   end
 end
