@@ -15,7 +15,7 @@ class Person < Nameable
   end
 
   def generate_new_id
-    rand(1..1000)  # You can adjust the range as needed
+    rand(1..1000) # You can adjust the range as needed
   end
 
   def add_rental(rental)
@@ -28,17 +28,5 @@ class Person < Nameable
 
   def can_use_services?
     @age.to_i >= 18 || @parent_permission
-  end
-
-  def self.load_last_id
-    last_id = 0
-    last_id = File.read('last_id.txt').to_i if File.exist?('last_id.txt')
-    last_id
-  end
-
-  def self.update_last_id(id)
-    last_id = load_last_id
-    new_last_id = [id, last_id].max
-    File.write('last_id.txt', new_last_id.to_s)
   end
 end
