@@ -21,9 +21,7 @@ class App
     @people = []
     @rentals = []
   end
-  def load_people
-    @people = @students.grab_students
-  end
+
   def welcome
     puts 'Welcome to the School\'s Library'
     puts '--------------------------------'
@@ -113,6 +111,39 @@ class App
     run
   end
 
+  def load_people
+    return unless File.exist?('people.json')
+
+    people_data = JSON.parse(File.read('people.json'))
+    people_data.each do |person_data|
+      if person_data['type'] == 'Student'
+        person = Student.new(person_data['classroom'], person_data['name'], person_data['age'].to_i,
+                             parent_permission: person_data['parent_permission'])
+      elsif person_data['type'] == 'Teacher'
+        person = Teacher.new(person_data['specialization'], person_data['name'], person_data['age'].to_i)
+      end
+
+      @people.push(person)
+    end
+  end
+
+  def save_people
+    people_data = @people.map do |person|
+      data = {
+        'type' => person.class.name,
+        'name' => person.name,
+        'age' => person.age,
+        'id' => person.id,
+        'classroom' => person.respond_to?(:classroom) ? person.classroom : nil,
+        'parent_permission' => person.respond_to?(:parent_permission) ? person.parent_permission : nil,
+        'specialization' => person.respond_to?(:specialization) ? person.specialization : nil
+      }
+      data
+    end
+
+    File.write('people.json', JSON.generate(people_data))
+  end
+
   def list_rentals_for_person
     puts 'Listing all rentals for a given person id'
     puts 'Please enter the person id:'
@@ -129,7 +160,23 @@ class App
 
     rentals_data = JSON.parse(File.read('rentals.json'))
     rentals_data.each do |rental_data|
-      rental = Rental.new(rental_data['date'], rental_data['book'], rental_data['person'])
+      book_data = rental_data['book']
+      person_data = rental_data['person']
+
+      next unless book_data && person_data
+
+      book = @library.grab_all_books.find { |b| b.title == book_data['title'] && b.author == book_data['author'] }
+
+      if person_data['type'] == 'Student'
+        person = @people.find { |p| p.instance_of?(Student) && p.name == person_data['name'] }
+      elsif person_data['type'] == 'Teacher'
+        person = @people.find { |p| p.instance_of?(Teacher) && p.name == person_data['name'] }
+      end
+
+      if book && person
+        rental = Rental.new(rental_data['date'], book, person)
+        add_rental(rental)
+      end
     end
   end
 
@@ -137,8 +184,18 @@ class App
     rentals_data = @rentals.map do |rental|
       {
         'date' => rental.date,
-        'book' => rental.book,
-        'person' => rental.person
+        'book' => {
+          'title' => rental.book.title,
+          'author' => rental.book.author
+        },
+        'person' => {
+          'name' => rental.person.name,
+          'age' => rental.person.age,
+          'id' => rental.person.id,
+          'classroom' => rental.person.respond_to?(:classroom) ? rental.person.classroom : nil,
+          'parent_permission' => rental.person.respond_to?(:parent_permission) ? rental.person.parent_permission : nil,
+          'specialization' => rental.person.respond_to?(:specialization) ? rental.person.specialization : nil
+        }
       }
     end
 

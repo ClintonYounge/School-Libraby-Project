@@ -6,18 +6,20 @@ class PeopleHandler
     if students.empty?
       puts 'There is no student in the library'
     else
-      puts ' '
       students.each do |student|
-        puts "[Student] Name: #{student.name}, Age: #{student.age}, Parental Perms: #{student.parent_permission}"
+        age = student.age
+        parent_permission = student.parent_permission
+        puts "[Student] Name: #{student.name}, Age: #{age}, ID: #{student.id}, Parental Perms: #{parent_permission}"
       end
     end
 
     if teachers.empty?
       puts 'There is no teacher in the library'
     else
-      puts ' '
       teachers.each do |teacher|
-        puts "[Teacher] Name: #{teacher.name}, Age: #{teacher.age}, Specialization: #{teacher.specialization}"
+        name = teacher.name
+        age = teacher.age
+        puts "[Teacher] Name: #{name}, Age: #{age}, ID: #{teacher.id}, Specialization: #{teacher.specialization}"
       end
     end
   end

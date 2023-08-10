@@ -16,6 +16,7 @@ def main
   app.teachers.save_teachers
   app.library.save_books
   app.save_rentals
+  app.save_people
 end
 
 main

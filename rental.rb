@@ -9,5 +9,4 @@ class Rental
     @book = book
     @person = person
   end
-
 end
