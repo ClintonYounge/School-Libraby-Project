@@ -8,6 +8,7 @@ def main
   app.teachers.load_teachers
   app.library.load_books
   app.load_rentals
+  app.load_people
 
   app.run
 
