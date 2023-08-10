@@ -37,7 +37,8 @@ class Teachers
       {
         'specialization' => teacher.specialization,
         'name' => teacher.name,
-        'age' => teacher.age
+        'age' => teacher.age,
+        'id' => teacher.id
       }
     end
 
@@ -52,7 +53,8 @@ class Teachers
       teacher = Teacher.new(
         teacher_data['specialization'],
         teacher_data['name'],
-        teacher_data['age'].to_i
+        teacher_data['age'].to_i,
+        id: teacher_data['id']
       )
       add_teacher(teacher)
     end
