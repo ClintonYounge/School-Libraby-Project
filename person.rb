@@ -5,13 +5,20 @@ class Person < Nameable
   attr_reader :rentals
   attr_accessor :name, :age, :parent_permission
 
+  @@last_id = 0
+
   def initialize(name = 'Unknown', age = nil, parent_permission: true)
     super()
-    @id = rand(1...1000)
+    @id = id || generate_new_id
     @name = name
     @age = age
     @parent_permission = parent_permission
     @rentals = []
+  end
+
+  def generate_new_id
+    @@last_id += 1
+    @@last_id
   end
 
   def add_rental(rental)

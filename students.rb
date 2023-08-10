@@ -59,7 +59,6 @@ class Students
         student_data['classroom'],
         student_data['name'],
         student_data['age'].to_i,
-        id: student_data['id'],  # Use the ID from JSON data
         parent_permission: student_data['parent_permission']
       )
       add_student(student)

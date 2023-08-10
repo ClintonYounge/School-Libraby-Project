@@ -53,7 +53,6 @@ class Teachers
         teacher_data['specialization'],
         teacher_data['name'],
         teacher_data['age'].to_i,
-        id: teacher_data['id']  # Use the ID from JSON data
       )
       add_teacher(teacher)
     end
