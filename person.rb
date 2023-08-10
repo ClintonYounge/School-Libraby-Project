@@ -5,7 +5,7 @@ class Person < Nameable
   attr_reader :rentals
   attr_accessor :name, :age, :parent_permission
 
-  @@last_id = 0
+  @last_id = 0
 
   def initialize(name = 'Unknown', age = nil, parent_permission: true)
     super()
@@ -17,7 +17,7 @@ class Person < Nameable
   end
 
   def generate_new_id
-    @@last_id += 1
+    self.class.last_id += 1
   end
 
   def add_rental(rental)
@@ -45,10 +45,15 @@ class Person < Nameable
   end
 
   def self.last_id
-    @@last_id
+    @last_id ||= 0
   end
 
-  def self.last_id=(value)
-    @@last_id = value
+  class << self
+    attr_writer :last_id
+  end
+
+  def self.increment_last_id
+    @last_id ||= 0
+    @last_id += 1
   end
 end
