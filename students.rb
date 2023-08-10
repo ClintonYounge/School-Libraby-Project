@@ -55,8 +55,13 @@ class Students
 
     students_data = JSON.parse(File.read('students.json'))
     students_data.each do |student_data|
-      student = Student.new(student_data['classroom'], student_data['name'], student_data['age'].to_i,
-                            parent_permission: student_data['parent_permission'])
+      student = Student.new(
+        student_data['classroom'],
+        student_data['name'],
+        student_data['age'].to_i,
+        id: student_data['id'],  # Use the ID from JSON data
+        parent_permission: student_data['parent_permission']
+      )
       add_student(student)
     end
   end

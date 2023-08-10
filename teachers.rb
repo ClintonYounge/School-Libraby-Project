@@ -49,7 +49,12 @@ class Teachers
 
     teachers_data = JSON.parse(File.read('teachers.json'))
     teachers_data.each do |teacher_data|
-      teacher = Teacher.new(teacher_data['specialization'], teacher_data['name'], teacher_data['age'].to_i)
+      teacher = Teacher.new(
+        teacher_data['specialization'],
+        teacher_data['name'],
+        teacher_data['age'].to_i,
+        id: teacher_data['id']  # Use the ID from JSON data
+      )
       add_teacher(teacher)
     end
   end
