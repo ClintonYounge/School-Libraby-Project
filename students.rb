@@ -43,7 +43,7 @@ class Students
         'classroom' => student.classroom,
         'name' => student.name,
         'age' => student.age,
-        'id' => 
+        'id' => student.id,
         'parent_permission' => student.parent_permission
       }
     end
@@ -60,8 +60,8 @@ class Students
         student_data['classroom'],
         student_data['name'],
         student_data['age'].to_i,
-        parent_permission: student_data['parent_permission']
-        
+        parent_permission: student_data['parent_permission'],
+        id: student_data['id']
       )
       add_student(student)
     end
