@@ -8,6 +8,7 @@ require_relative 'rental'
 require_relative 'menu_handler'
 require_relative 'book_handler'
 require_relative 'people_handler'
+require_relative 'storage_methods'
 
 class App
   attr_accessor :library, :students, :teachers, :something, :bookhandler
@@ -20,6 +21,7 @@ class App
     @people_handler = PeopleHandler.new
     @people = []
     @rentals = []
+    @storage = Storage.new
   end
 
   def welcome
@@ -112,26 +114,7 @@ class App
   end
 
   def load_people
-    return unless File.exist?('people.json')
-
-    people_data = JSON.parse(File.read('people.json'))
-    people_data.each do |person_data|
-      if person_data['type'] == 'Student'
-        student = Student.new(person_data['classroom'], person_data['name'],
-                              person_data['age'].to_i,
-                              parent_permission: person_data['parent_permission'],
-                              id: person_data['id'])
-        @people.push(student)
-      elsif person_data['type'] == 'Teacher'
-        teacher = Teacher.new(
-          person_data['specialization'],
-          person_data['name'],
-          person_data['age'].to_i,
-          id: person_data['id']
-        )
-        @people.push(teacher)
-      end
-    end
+    @storage.load_people(@people)
   end
 
   def save_people
