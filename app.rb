@@ -85,7 +85,6 @@ class App
     if @people.empty?
       puts 'There is no one in the library.'
     else
-      puts ' '
       puts 'Select a person from the following list by number (not id):'
 
       @people.each_with_index do |person, index|
@@ -135,7 +134,6 @@ class App
   end
 
   def list_rentals_for_person
-    puts 'Listing all rentals for a given person id'
     puts 'Please enter the person id:'
     person_id = gets.chomp.to_i
     puts ' '
@@ -150,20 +148,23 @@ class App
 
     rentals_data = JSON.parse(File.read('rentals.json'))
     rentals_data.each do |rental_data|
-      book_title = rental_data['book']['title']
-      book_author = rental_data['book']['author']
-      person_id = rental_data['person']['id']
+      load_and_associate_rental(rental_data)
+    end
+  end
 
-      book = @library.grab_all_books.find { |b| b.title == book_title && b.author == book_author }
-      person = @people.find { |p| p.id == person_id }
+  def load_and_associate_rental(rental_data)
+    book = @library.grab_all_books.find do |b|
+      b.title == rental_data['book']['title'] && b.author == rental_data['book']['author']
+    end
+    person = @people.find { |p| p.id == rental_data['person']['id'] }
 
-      if book && person
-        rental = Rental.new(rental_data['date'], book, person)
-        @rentals.push(rental)
-      else
-        puts "Failed to associate rental: #{rental_data}"
-        puts "Book: #{book_title} by #{book_author}, Person ID: #{person_id}"
-      end
+    if book && person
+      rental = Rental.new(rental_data['date'], book, person)
+      @rentals.push(rental)
+    else
+      puts 'Failed to associate rental:'
+      book_name = rental_data['book']['title']
+      puts "Book: #{book_name} by #{rental_data['book']['author']},Person ID: #{rental_data['person']['id']}"
     end
   end
 

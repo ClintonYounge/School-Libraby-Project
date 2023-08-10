@@ -9,7 +9,7 @@ class Person < Nameable
 
   def initialize(name = 'Unknown', age = nil, parent_permission: true)
     super()
-    @id = id || generate_new_id
+    @id = generate_new_id
     @name = name
     @age = age
     @parent_permission = parent_permission
@@ -18,7 +18,6 @@ class Person < Nameable
 
   def generate_new_id
     @@last_id += 1
-    @@last_id
   end
 
   def add_rental(rental)
@@ -43,5 +42,13 @@ class Person < Nameable
 
   def can_use_services?
     @age.to_i >= 18 || @parent_permission
+  end
+
+  def self.last_id
+    @@last_id
+  end
+
+  def self.last_id=(value)
+    @@last_id = value
   end
 end
