@@ -7,11 +7,15 @@ class Person < Nameable
 
   def initialize(name = 'Unknown', age = nil, parent_permission: true)
     super()
-    @id = rand(1...1000)
+    @id = generate_new_id
     @name = name
     @age = age
     @parent_permission = parent_permission
     @rentals = []
+  end
+
+  def generate_new_id
+    rand(1..1000) # You can adjust the range as needed
   end
 
   def add_rental(rental)

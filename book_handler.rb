@@ -1,3 +1,5 @@
+require 'json'
+
 class BookHandler
   def initialize
     @new_book
@@ -7,7 +9,7 @@ class BookHandler
     @new_book
   end
 
-  def create_book
+  def create_book(library)
     puts 'Creating a book'
 
     puts 'Please enter the book title:'
@@ -20,6 +22,7 @@ class BookHandler
     @new_book = new_book
 
     puts 'Book created successfully!'
+    library.add_book(new_book)
   end
 
   def list_all_books(library)

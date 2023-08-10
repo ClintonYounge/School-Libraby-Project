@@ -47,6 +47,10 @@ The site was built with Ruby.
 - Create rental feature.
 - Get rentals by ID feature.
 - Implement Solid principles.
+- Add storage for students.
+- Add storage for teachers.
+- Add storage for rentals
+- Implement persistent IDs
 
 ## Getting Started
 

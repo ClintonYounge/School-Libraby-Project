@@ -8,6 +8,7 @@ require_relative 'rental'
 require_relative 'menu_handler'
 require_relative 'book_handler'
 require_relative 'people_handler'
+require_relative 'storage_methods'
 
 class App
   attr_accessor :library, :students, :teachers, :something, :bookhandler
@@ -20,6 +21,7 @@ class App
     @people_handler = PeopleHandler.new
     @people = []
     @rentals = []
+    @storage = Storage.new
   end
 
   def welcome
@@ -56,9 +58,7 @@ class App
   end
 
   def create_book
-    @bookhandler.create_book
-    new_book = @bookhandler.library_book
-    @library.add_book(new_book)
+    @bookhandler.create_book(@library)
     run
   end
 
@@ -85,7 +85,6 @@ class App
     if @people.empty?
       puts 'There is no one in the library.'
     else
-      puts ' '
       puts 'Select a person from the following list by number (not id):'
 
       @people.each_with_index do |person, index|
@@ -99,16 +98,42 @@ class App
     book_num = grab_book_num
     person_num = grab_person_num
 
-    puts 'Please enter the date in YYYY-MM-DD format:'
-    date = gets.chomp
+    if person_num >= 0 && person_num < @people.length
+      puts 'Please enter the date in YYYY-MM-DD format:'
+      date = gets.chomp
 
-    @rentals.push(Rental.new(date, @library.grab_all_books[book_num], @people[person_num]))
-    puts 'Rental created successfully!'
+      rental = Rental.new(date, @library.grab_all_books[book_num], @people[person_num])
+      @rentals.push(rental)
+      puts 'Rental created successfully!'
+    else
+      puts 'Invalid person selection.'
+    end
+
     run
   end
 
+  def load_people
+    @storage.load_people(@people)
+  end
+
+  def save_people
+    people_data = @people.map do |person|
+      data = {
+        'type' => person.class.name,
+        'name' => person.name,
+        'age' => person.age,
+        'id' => person.id
+      }
+      data['classroom'] = person.classroom if person.is_a?(Student)
+      data['parent_permission'] = person.parent_permission if person.is_a?(Student)
+      data['specialization'] = person.specialization if person.is_a?(Teacher)
+      data
+    end
+
+    File.write('people.json', JSON.generate(people_data))
+  end
+
   def list_rentals_for_person
-    puts 'Listing all rentals for a given person id'
     puts 'Please enter the person id:'
     person_id = gets.chomp.to_i
     puts ' '
@@ -116,6 +141,49 @@ class App
       puts "Date: #{rental.date}, Book: #{rental.book.title}" if rental.person.id == person_id
     end
     run
+  end
+
+  def load_rentals
+    return unless File.exist?('rentals.json')
+
+    rentals_data = JSON.parse(File.read('rentals.json'))
+    rentals_data.each do |rental_data|
+      load_and_associate_rental(rental_data)
+    end
+  end
+
+  def load_and_associate_rental(rental_data)
+    book = @library.grab_all_books.find do |b|
+      b.title == rental_data['book']['title'] && b.author == rental_data['book']['author']
+    end
+    person = @people.find { |p| p.id == rental_data['person']['id'] }
+
+    if book && person
+      rental = Rental.new(rental_data['date'], book, person)
+      @rentals.push(rental)
+    else
+      puts 'Failed to associate rental:'
+      book_name = rental_data['book']['title']
+      puts "Book: #{book_name} by #{rental_data['book']['author']},Person ID: #{rental_data['person']['id']}"
+    end
+  end
+
+  def save_rentals
+    rentals_data = @rentals.map do |rental|
+      {
+        'date' => rental.date,
+        'book' => {
+          'title' => rental.book.title,
+          'author' => rental.book.author
+        },
+        'person' => {
+          'id' => rental.person.id,
+          'type' => rental.person.class.name
+        }
+      }
+    end
+
+    File.write('rentals.json', JSON.generate(rentals_data))
   end
 
   def exit
