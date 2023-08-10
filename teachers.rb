@@ -17,6 +17,8 @@ class Teachers
     @teachers
   end
 
+  attr_reader :teacher
+
   def teacher_input
     puts 'Creating a teacher'
     puts 'Please enter the teacher\'s name:'
@@ -28,7 +30,7 @@ class Teachers
 
     teacher = Teacher.new(specialization, name, age)
     add_teacher(teacher)
-    @people = teacher
+    @teacher = teacher
     puts 'Teacher created successfully!'
   end
 
