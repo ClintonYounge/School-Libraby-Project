@@ -21,7 +21,9 @@ class App
     @people = []
     @rentals = []
   end
-
+  def load_people
+    @people = @students.grab_students
+  end
   def welcome
     puts 'Welcome to the School\'s Library'
     puts '--------------------------------'
@@ -128,7 +130,6 @@ class App
     rentals_data = JSON.parse(File.read('rentals.json'))
     rentals_data.each do |rental_data|
       rental = Rental.new(rental_data['date'], rental_data['book'], rental_data['person'])
-      add_rental(rental)
     end
   end
 
