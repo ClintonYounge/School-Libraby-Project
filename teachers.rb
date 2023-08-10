@@ -17,8 +17,6 @@ class Teachers
     @teachers
   end
 
-  attr_reader :teacher
-
   def teacher_input
     puts 'Creating a teacher'
     puts 'Please enter the teacher\'s name:'
@@ -54,7 +52,7 @@ class Teachers
       teacher = Teacher.new(
         teacher_data['specialization'],
         teacher_data['name'],
-        teacher_data['age'].to_i,
+        teacher_data['age'].to_i
       )
       add_teacher(teacher)
     end

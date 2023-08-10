@@ -8,13 +8,10 @@ class Rental
     @date = date
     @book = book
 
-    if person.is_a?(Student) || person.is_a?(Teacher)
-      @person = person
-      book.add_rental(self)
-      person.add_rental(self)
-    else
-      raise ArgumentError, "Invalid person type for rental"
-    end
+    raise ArgumentError, 'Invalid person type for rental' unless person.is_a?(Student) || person.is_a?(Teacher)
+
+    @person = person
+    book.add_rental(self)
+    person.add_rental(self)
   end
 end
-

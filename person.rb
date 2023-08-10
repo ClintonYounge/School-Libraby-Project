@@ -31,9 +31,7 @@ class Person < Nameable
 
   def self.load_last_id
     last_id = 0
-    if File.exist?('last_id.txt')
-      last_id = File.read('last_id.txt').to_i
-    end
+    last_id = File.read('last_id.txt').to_i if File.exist?('last_id.txt')
     last_id
   end
 

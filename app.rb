@@ -113,17 +113,14 @@ class App
 
   def load_people
     return unless File.exist?('people.json')
-  
+
     people_data = JSON.parse(File.read('people.json'))
     people_data.each do |person_data|
       if person_data['type'] == 'Student'
-        student = Student.new(
-          person_data['classroom'],
-          person_data['name'],
-          person_data['age'].to_i,
-          parent_permission: person_data['parent_permission'],
-          id: person_data['id']
-        )
+        student = Student.new(person_data['classroom'], person_data['name'],
+                              person_data['age'].to_i,
+                              parent_permission: person_data['parent_permission'],
+                              id: person_data['id'])
         @people.push(student)
       elsif person_data['type'] == 'Teacher'
         teacher = Teacher.new(
@@ -133,12 +130,9 @@ class App
           id: person_data['id']
         )
         @people.push(teacher)
-      else
-        # Handle other person types if needed
       end
     end
   end
-  
 
   def save_people
     people_data = @people.map do |person|
@@ -153,7 +147,7 @@ class App
       data['specialization'] = person.specialization if person.is_a?(Teacher)
       data
     end
-  
+
     File.write('people.json', JSON.generate(people_data))
   end
 
@@ -170,16 +164,16 @@ class App
 
   def load_rentals
     return unless File.exist?('rentals.json')
-  
+
     rentals_data = JSON.parse(File.read('rentals.json'))
     rentals_data.each do |rental_data|
       book_title = rental_data['book']['title']
       book_author = rental_data['book']['author']
       person_id = rental_data['person']['id']
-  
+
       book = @library.grab_all_books.find { |b| b.title == book_title && b.author == book_author }
       person = @people.find { |p| p.id == person_id }
-  
+
       if book && person
         rental = Rental.new(rental_data['date'], book, person)
         @rentals.push(rental)
@@ -189,9 +183,6 @@ class App
       end
     end
   end
-  
-  
-  
 
   def save_rentals
     rentals_data = @rentals.map do |rental|
@@ -207,10 +198,9 @@ class App
         }
       }
     end
-  
+
     File.write('rentals.json', JSON.generate(rentals_data))
   end
-  
 
   def exit
     puts 'Thank you for using this app!'
