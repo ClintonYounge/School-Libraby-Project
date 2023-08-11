@@ -2,22 +2,26 @@ require_relative '../teacher'
 
 describe Teacher do
   before :each do
-    @teacher = Teacher.new('English', 'Clinton Younge', 18)
+    @teacher = Teacher.new('English', 'Clinton Younge', 30)
   end
 
-  it 'validate the teacher specialization' do
+  it 'should validate the teacher specialization' do
     expect(@teacher.specialization).to eq('English')
   end
 
-  it 'validate the teacher name' do
+  it 'should validate the teacher name' do
     expect(@teacher.name).to eq('Clinton Younge')
   end
 
-  it 'validate the teacher age' do
-    expect(@teacher.age).to eq(18)
+  it 'should validate the teacher age' do
+    expect(@teacher.age).to eq(30)
   end
 
-  it 'validate empty list of rentals' do
+  it 'should validate empty list of rentals' do
     expect(@teacher.rentals).to eq([])
+  end
+
+  it 'should allow using services' do
+    expect(@teacher.can_use_services?).to eq(true)
   end
 end

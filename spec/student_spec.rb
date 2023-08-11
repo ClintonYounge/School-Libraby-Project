@@ -7,19 +7,26 @@ describe Student do
     @student = Student.new(@classroom, 'Clinton Younge', 18)
   end
 
-  it 'validate student classroom' do
+  it 'should validate student classroom' do
     expect(@student.classroom).to eq(@classroom)
   end
 
-  it 'validate the student name' do
+  it 'should validate the student name' do
     expect(@student.name).to eq('Clinton Younge')
   end
 
-  it 'validate the student age' do
+  it 'should validate the student age' do
     expect(@student.age).to eq(18)
   end
 
-  it 'validate empty list of rentals' do
-    expect(@student.rentals).to eq([])
+  it 'should assign a classroom' do
+    new_classroom = Classroom.new('Class B')
+    @student.assign_classroom(new_classroom)
+    expect(@student.classroom).to eq(new_classroom)
+    expect(new_classroom.students).to include(@student)
+  end
+
+  it 'should play hooky' do
+    expect(@student.play_hooky).to eq('¯\(ツ)/¯')
   end
 end
