@@ -51,6 +51,7 @@ The site was built with Ruby.
 - Add storage for teachers.
 - Add storage for rentals
 - Implement persistent IDs
+- Implemented Unit Testings for all classes
 
 ## Getting Started
 
@@ -109,7 +110,7 @@ Install this project with:
 
 ## 🔭 Future Features <a name="future-features"></a>
 
-- Storage
+- Implement a (TDD) Test Driven Development approach.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
