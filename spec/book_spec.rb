@@ -23,7 +23,7 @@ describe Book do
   end
 
   it 'should add a rental' do
-    rental = Rental.new("2022-10-10", @book, @student)
+    rental = Rental.new('2022-10-10', @book, @student)
     @book.add_rental(rental)
     expect(@book.rentals[0]).to eq(rental)
   end
